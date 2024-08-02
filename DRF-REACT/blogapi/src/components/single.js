@@ -14,26 +14,25 @@ const Paper = styled('div')(({ theme }) => ({
 
 export default function Post() {
   const { slug } = useParams();
+
   const [data, setData] = useState({ posts: [] });
-  const [error, setError] = useState(null); // Add state for error handling
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    axiosInstance.get(slug)
-      .then((res) => {
-        console.log('Response data:', res.data); // Log the entire response
-        setData({ posts: res.data });
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error); // Log the error
-        setError('Failed to load data.'); // Set an error message
-      });
-  }, [slug]);
+    axiosInstance.get('post/' + slug).then((res) => {
+      setData({ posts: res.data });
+      console.log(res.data);
+    }).catch((err) => {
+      setError('An error occurred while fetching the data.');
+      console.error('Error fetching data:', err);
+    });
+  }, [setData]);
 
   return (
     <Container component="main" maxWidth="md">
       <CssBaseline />
       <Paper></Paper>
-      {error ? ( // Conditionally render error message
+      {error ? (
         <Typography color="error" align="center">
           {error}
         </Typography>

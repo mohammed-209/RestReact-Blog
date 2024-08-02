@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -6,8 +6,11 @@ import Typography from '@mui/material/Typography';
 import CssBaseline from '@mui/material/CssBaseline';
 import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { styled } from '@mui/system';
+import TextField from '@mui/material/TextField';
+import InputAdornment from '@mui/material/InputAdornment';
+import SearchIcon from '@mui/icons-material/Search';
 
 const theme = createTheme({
   palette: {
@@ -37,6 +40,17 @@ const LogoutButton = styled(Button)(({ theme }) => ({
 }));
 
 const Header = () => {
+  const navigate = useNavigate();
+  const [search, setSearch] = useState('');
+
+  const goSearch = () => {
+    navigate({
+      pathname: '/search/',
+      search: '?search=' + search,
+    });
+    window.location.reload();
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -47,6 +61,24 @@ const Header = () => {
               Blog
             </LinkStyled>
           </ToolbarTitleStyled>
+          <TextField
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') {
+                
+                goSearch();
+              }
+            }}
+            placeholder="Search…"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+            }}
+          />
           <nav>
             <LinkStyled color="textPrimary" component={NavLink} underline="none" to="/register">
               Register
@@ -63,4 +95,5 @@ const Header = () => {
     </ThemeProvider>
   );
 };
+
 export default Header;
