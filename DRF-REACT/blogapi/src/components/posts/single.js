@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axiosInstance from '../axios';
+import axiosInstance from '../../axios';
 import { useParams } from 'react-router-dom';
 // MUI
 import { CssBaseline, Container, Typography } from '@mui/material';

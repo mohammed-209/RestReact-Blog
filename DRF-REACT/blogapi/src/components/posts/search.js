@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axiosInstance from '../axios';
+import axiosInstance from '../../axios';
 import {
   CssBaseline,
   Container,
@@ -64,7 +64,7 @@ const Search = () => {
               <Card>
                 <LinkStyled color="textPrimary" href={'/post/' + post.slug}>
                   <CardMediaStyled
-                    image="https://source.unsplash.com/random"
+                    image="https://picsum.photos/1000"
                     title="Image title"
                   />
                 </LinkStyled>

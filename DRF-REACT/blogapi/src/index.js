@@ -6,11 +6,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Header from './components/header';
 import Footer from './components/footer';
-import Register from './components/register';
-import Login from "./components/login"
-import Logout from "./components/logout"
-import Single from './components/single';
-import Search from './components/search';
+import Register from './components/auth/register';
+import Login from "./components/auth/login"
+import Logout from "./components/auth/logout"
+import Single from './components/posts/single';
+import Search from './components/posts/search';
+import Admin from './Admin';
+import Create from './components/admin/create';
+import Edit from './components/admin/edit';
+import Delete from './components/admin/delete';
 
 const routing = (
   <Router>
@@ -18,6 +22,10 @@ const routing = (
       <Header/>
       <Routes>
         <Route exact path="/" element={<App/>} />
+        <Route exact path="/admin" Component={Admin} />
+        <Route exact path="/admin/create" Component={Create} />
+        <Route exact path="/admin/edit/:id" Component={Edit} />
+        <Route exact path="/admin/delete/:id" Component={Delete} />
         <Route path="/register" Component={Register} />
         <Route path="/login" Component={Login} />
         <Route path="/logout" Component={Logout} />
